@@ -1,5 +1,8 @@
 ---
+import { db, Comment } from "astro:db"
 
+
+const comments = await db.select().from(Comment);
 ---
 
 <html lang="en">
@@ -12,5 +15,13 @@
 	</head>
 	<body>
 		<h1>Astro</h1>
+		{
+			comments.map( (comment)  =>{
+				<article>
+					<h6>{comment.id}</h6>
+					<p>{comment.content}</p>
+				</article>
+			})
+		}
 	</body>
 </html>
